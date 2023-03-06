@@ -16,9 +16,10 @@
                 for (var el of added.find("button")){
                     var dtMeta = $._data( el, "events" )
                     if(dtMeta.click){
+                        console.log("event tamper", el, dtMeta)
                         var handle = dtMeta.click.handler
                         el.off("click")
-                        el.on("click",function(){ if confirm("Are u sure about that?") handle() })
+                        el.on("click",function(){ if (confirm("Are u sure about that?")) handle() })
                     }
                 }
             }
@@ -39,7 +40,7 @@
         if(dtMeta.click){
             var handle = dtMeta.click.handler
             el.off("click")
-            el.on("click",function(){ if confirm("Are u sure about that?") handle() })
+            el.on("click",function(){ if (confirm("Are u sure about that?")) handle() })
         }
     }
     var observer = new MutationObserver(mod);
