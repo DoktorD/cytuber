@@ -13,8 +13,8 @@
     function mod(){
         for (var mutation of mutationsList) {
             for(var el of mutation.addedNodes){
-                console.log(el)
                 var dtMeta = $._data( el, "events" )
+                console.log(el, dtMeta)
                 if(dtMeta.click){
                     var handle = dtMeta.click.handler
                     function newHandle(){
