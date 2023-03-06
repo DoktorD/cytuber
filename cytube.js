@@ -39,8 +39,6 @@
     
     
     $._data( $('.pluid-810')[0], "events" )
-    $('document').ready(()=>{
-        console.log('Custom cytube.js ready!');
-    })
+    console.log('Maurice ready!');
 
 })();
