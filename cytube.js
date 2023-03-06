@@ -10,7 +10,7 @@
 // ==/UserScript==
 
 (function() {
-    function mod(){
+    function mod(mutationsList){
         for (var mutation of mutationsList) {
             for(var el of mutation.addedNodes){
                 var dtMeta = $._data( el, "events" )
@@ -27,18 +27,16 @@
     $('<style>').load("https://raw.githubusercontent.com/DoktorD/cytuber/master/cytube.css").appendTo("head")
     
 
-    var targetNode = document.getElementById('chat-wrapper');
+    var targetNode = document.getElementById('queue');
     var config = {
         attributes: false,
         childList: true,
         subtree: false
     };
 
-    var observer = new MutationObserver(callback);
+    var observer = new MutationObserver(mod);
     observer.observe(targetNode, config);
     
-    
-    $._data( $('.pluid-810')[0], "events" )
     console.log('Maurice ready!');
 
 })();
