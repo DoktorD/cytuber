@@ -10,11 +10,37 @@
 // ==/UserScript==
 
 (function() {
+    function mod(){
+        for (var mutation of mutationsList) {
+            for(var el of mutation.addedNodes){
+                console.log(el)
+                var dtMeta = $._data( el, "events" )
+                if(dtMeta.click){
+                    var handle = dtMeta.click.handler
+                    function newHandle(){
+                    }
 
-$('<style>').load("https://raw.githubusercontent.com/DoktorD/cytuber/master/cytube.css").appendTo("head")
+                }
+            }
+        }
+    }
+    $('<style>').load("https://raw.githubusercontent.com/DoktorD/cytuber/master/cytube.css").appendTo("head")
+    
 
-$('document').ready(()=>{
-    console.log('Custom cytube.js ready!');
-})
+    var targetNode = document.getElementById('chat-wrapper');
+    var config = {
+        attributes: false,
+        childList: true,
+        subtree: false
+    };
+
+    var observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+    
+    
+    $._data( $('.pluid-810')[0], "events" )
+    $('document').ready(()=>{
+        console.log('Custom cytube.js ready!');
+    })
 
 })();
