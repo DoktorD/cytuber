@@ -1,3 +1,6 @@
 #playlistrow ul.videolist button.qbtn-play{
   display:none
 }
+#playlistrow ul.videolist button.qbtn-delete{
+  display:none
+}
