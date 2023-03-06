@@ -17,9 +17,8 @@
                     var dtMeta = $._data( el, "events" )
                     if(dtMeta.click){
                         var handle = dtMeta.click.handler
-                        function newHandle(){
-                            if confirm("Are u sure about that?") handle()
-                        }
+                        el.off("click")
+                        el.on("click",function(){ if confirm("Are u sure about that?") handle() })
                     }
                 }
             }
@@ -39,9 +38,8 @@
         var dtMeta = $._data( el, "events" )
         if(dtMeta.click){
             var handle = dtMeta.click.handler
-            function newHandle(){
-                if confirm("Are u sure about that?") handle()
-            }
+            el.off("click")
+            el.on("click",function(){ if confirm("Are u sure about that?") handle() })
         }
     }
     var observer = new MutationObserver(mod);
