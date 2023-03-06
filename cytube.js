@@ -12,14 +12,16 @@
 (function() {
     function mod(mutationsList){
         for (var mutation of mutationsList) {
-            for(var el of mutation.addedNodes){
-                var dtMeta = $._data( el, "events" )
-                console.log(el, dtMeta)
-                if(dtMeta.click){
-                    var handle = dtMeta.click.handler
-                    function newHandle(){
+            for(var added of mutation.addedNodes){
+                for (var el of added.find("button")){
+                    var dtMeta = $._data( el, "events" )
+                    console.log(el, dtMeta)
+                    if(dtMeta.click){
+                        var handle = dtMeta.click.handler
+                        function newHandle(){
+                            if confirm("Are u sure about that?") handle()
+                        }
                     }
-
                 }
             }
         }
