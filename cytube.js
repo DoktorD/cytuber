@@ -30,7 +30,7 @@ $(document).ready( ()=>{
     for (let emoteN in emotes) {
 		let img = document.createElement("img");
 		img.id = emoteN
-		img.src = emoteN
+		img.src = emotes[emoteN]
         root.appendChild(img);
     }
 });
