@@ -61,9 +61,9 @@ $(document).ready( ()=>{
 				for(var added of mutation.addedNodes){
 					setTimeout(() => {
 						for (var el of $(added).find("button")){
-							setTimeout(eventTamper,150, el)
+							setTimeout(eventTamper,50, el)
 						}
-					},150)
+					},50)
 				}
 			}
 		}
