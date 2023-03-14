@@ -28,9 +28,9 @@ $(document).ready( ()=>{
     const root = document.getElementsByTagName("body")[0];
 
     for (let emoteN in emotes) {
-		let img = document.createElement("img");
-		img.id = emoteN
-		img.src = emotes[emoteN]
+	let img = document.createElement("img");
+	img.id = emoteN
+	img.src = emotes[emoteN]
         root.appendChild(img);
     }
 });
