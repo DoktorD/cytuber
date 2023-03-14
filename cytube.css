@@ -1,1 +1,177 @@
 
+body {
+    background-image: none!important;
+}
+
+footer {
+    display: none!important;
+}
+
+@keyframes bounce-up {
+    0%   { transform: scale(1,1)      translateY(0); }
+    10%  { transform: scale(1.1,.9)   translateY(0); }
+    30%  { transform: scale(.9,1.1)   translateY(-100px); }
+    50%  { transform: scale(1.05,.95) translateY(0); }
+    57%  { transform: scale(1,1)      translateY(-7px); }
+    64%  { transform: scale(1,1)      translateY(0); }
+    100% { transform: scale(1,1)      translateY(0); }
+}
+
+@keyframes rotate-bottom {
+    0% {
+        transform: rotate(0);
+        transform-origin: bottom;
+    }
+    100% {
+        transform: rotate(360deg);
+        transform-origin: bottom;
+    }
+}
+
+/* Background Transparency */
+#messagebuffer,
+#userlist,
+.queue_temp,
+.queue_active.queue_temp,
+input.form-control[type="text"],
+#plmeta {
+    background: rgba(26, 27, 28, 0.6)!important;
+}
+
+/* Remove scrollbars */
+#userlist::-webkit-scrollbar,
+#messagebuffer::-webkit-scrollbar {
+    display: none;
+}
+
+#userlist::-webkit-scrollbar,
+#messagebuffer {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+/*  Styling for all background emotes */
+body > img {
+    width: 64px;
+    z-index: -1
+}
+
+/* Positioning of emotement */
+#quinPsycho {
+    position: fixed;
+    bottom: 520px;
+    left: 2%
+}
+
+#batDisco {
+    position: fixed;
+    bottom: 0px;
+    left: 80%;
+    width: 100px
+}
+
+#AlienGathering {
+    position: fixed;
+    width: 150px;
+    left: 1%;
+    bottom: 0px;
+}
+
+#alizeePls {
+    position: fixed;
+    bottom: 0px;
+    left: 60%
+}
+
+#gachiHOP {
+    animation: rotate-bottom 5s infinite cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    position: fixed;
+    bottom: 500px;
+    left: 30%;
+}
+
+#GIGACHAT {
+    position: fixed;
+    bottom: 300px;
+    left: 2%;
+}
+
+#goosePls {
+    position: fixed;
+    bottom: 390px;
+    left: 39%;
+    transform: rotate(270deg);
+}
+
+#BBoomer {
+    position: fixed;
+    bottom: 0px;
+    left: 30%;
+    transform: scaleX(-1);
+}
+
+#quinJAM {
+    position: fixed;
+    bottom: 0px;
+    left: 15%;
+}
+
+
+#quinPls {
+    position: fixed;
+    bottom: 480px;
+    left: 39%;
+    transform: rotate(270deg);
+}
+
+#docPls {
+    position: fixed;
+    bottom: 650px;
+    left: 0;
+    transform: rotate(90deg) scaleX(-1);
+}
+
+#newMeta {
+    position: fixed;
+    bottom: 0px;
+    left: 25%;
+}
+
+#pepeD {
+    animation: rotate-bottom 5s infinite linear both;
+    position: fixed;
+    bottom: 150px;
+    left: 30%;
+}
+
+#RainbowPls {
+    position: fixed;
+    bottom: 240px;
+    left: 25%;
+}
+
+#POGGERS {
+    position: fixed;
+    bottom: 0px;
+    left: 70%;
+}
+
+#TriDance {
+    position: fixed;
+    bottom: 0px;
+    left: 20%;
+}
+
+#ratJam {
+    position: fixed;
+    bottom: 600px;
+    left: 25%;
+}
+
+#docJAM {
+    position: fixed;
+    bottom: 600px;
+    left: 39%;
+    transform: rotate(270deg);
+}
