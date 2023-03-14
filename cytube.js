@@ -73,18 +73,22 @@ $(document).ready( ()=>{
 	
 	
 	function bindObs(){
-		//holy race condition site. god knows when the queue is added to the dom
+		//holy race condition site. god knows when the queue is added to the dom 
 		setTimeout( () => {
-			console.log("bindObs")
-			let targetNode = document.getElementById('queue');
-			if(targetNode && $(targetNode).find("button").length){
-				console.log("init tamper")
+			console.log('bindObs')
+			let targetNode = document.getElementById('queue')
+
+			let tq = $(targetNode).find('.queue_entry')
+			let tbtn = tq.find('button')
+			//so we wait until we find all the btns there are 4 per
+			if(targetNode && tq && tbtn && tq.length == tbtn.length * 4){
+				console.log('init tamper')
 				let config = {
 					attributes: false,
 					childList: true,
 					subtree: false
 				}
-				for (let el of $(targetNode).find("button")){
+				for (let el of $(targetNode).find('button')){
 					eventTamper(el)
 				}
 				let observer = new MutationObserver(obsF);
