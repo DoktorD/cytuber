@@ -34,18 +34,13 @@ $(document).ready( ()=>{
     }
 
 
-	
-});
-
-// block delete and play now
-(() => {
-
+	// block delete and play now
 	function eventTamper(el){
 		var dtMeta = $._data( el, "events" )
 		if(dtMeta.click[0]){
 			var $el = $(el)
 			if($el.hasClass("qbtn-play")||$el.hasClass("qbtn-delete")){
-
+	
 				var handle = dtMeta.click[0].handler
 				console.log("event tamper", el, dtMeta.click, handle)
 				$el.addClass("btn-danger")
@@ -55,45 +50,46 @@ $(document).ready( ()=>{
 						handle()
 					}
 				})
-
+	
 			}
 		}
-	}
-
+	}	
 	function obsF(mutationsList){
 		console.log("mutations ", mutationsList)
 		for (var mutation of mutationsList) {
-			for(var added of mutation.addedNodes){
-				setTimeout(() => {
-					for (var el of $(added).find("button")){
-						setTimeout(eventTamper,150, el)
-					}
-				},150)
+			if(mutation.addedNodes.length){
+				for(var added of mutation.addedNodes){
+					setTimeout(() => {
+						for (var el of $(added).find("button")){
+							setTimeout(eventTamper,150, el)
+						}
+					},150)
+				}
 			}
 		}
 	}
-
 	
-	console.log("init tamper")
-	setTimeout( () => {
-
+	//holy race condition site. god knows when this js is loaded
+	// setTimeout( () => {
+	// 	console.log("init tamper")
+	
 		var targetNode = document.getElementById('queue');
 		var config = {
 			attributes: false,
 			childList: true,
 			subtree: false
 		};
-
-		for (var el of $(targetNode).find("button")){
-			eventTamper(el)
-		}
-
+	
+	// 	for (var el of $(targetNode).find("button")){
+	// 		eventTamper(el)
+	// 	}
+	
 		var observer = new MutationObserver(obsF);
 		observer.observe(targetNode, config);
-		console.log('Maurice ready!');
+		
+	// },1000)
+	
+	console.log('Maurice ready!');
+});
 
-	},3500)
 
-
-
-})()
