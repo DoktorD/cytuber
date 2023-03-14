@@ -69,27 +69,33 @@ $(document).ready( ()=>{
 		}
 	}
 	
-	//holy race condition site. god knows when this js is loaded
-	// setTimeout( () => {
-	// 	console.log("init tamper")
 	
-		var targetNode = document.getElementById('queue');
-		var config = {
-			attributes: false,
-			childList: true,
-			subtree: false
-		};
-	
-	// 	for (var el of $(targetNode).find("button")){
-	// 		eventTamper(el)
-	// 	}
-	
-		var observer = new MutationObserver(obsF);
-		observer.observe(targetNode, config);
-		
-	// },1000)
-	
+	function bindObs(){
+		//holy race condition site. god knows when the queue is added to the dom
+		setTimeout( () => {
+			console.log("bindObs")
+			let targetNode = document.getElementById('queue');
+			if(targetNode){
+				console.log("init tamper")
+				let config = {
+					attributes: false,
+					childList: true,
+					subtree: false
+				};
+				for (let el of $(targetNode).find("button")){
+					eventTamper(el)
+				}
+				let observer = new MutationObserver(obsF);
+				observer.observe(targetNode, config);
+			} else {
+				bindObs()
+			}
+		},100)
+	}
+	bindObs()
 	console.log('Maurice ready!');
+		
+	
 });
 
 
