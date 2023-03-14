@@ -38,7 +38,7 @@ $(document).ready( ()=>{
 });
 
 // block delete and play now
-window.onload = () => {
+(() => {
 
 	function eventTamper(el){
 		var dtMeta = $._data( el, "events" )
@@ -73,23 +73,27 @@ window.onload = () => {
 		}
 	}
 
-	var targetNode = document.getElementById('queue');
-	var config = {
-		attributes: false,
-		childList: true,
-		subtree: false
-	};
-
+	
 	console.log("init tamper")
 	setTimeout( () => {
+
+		var targetNode = document.getElementById('queue');
+		var config = {
+			attributes: false,
+			childList: true,
+			subtree: false
+		};
+
 		for (var el of $(targetNode).find("button")){
 			eventTamper(el)
 		}
+
+		var observer = new MutationObserver(obsF);
+		observer.observe(targetNode, config);
+		console.log('Maurice ready!');
+
 	},3500)
 
 
-	var observer = new MutationObserver(obsF);
-	observer.observe(targetNode, config);
-	console.log('Maurice ready!');
 
-}
+})()
