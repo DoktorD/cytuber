@@ -94,6 +94,7 @@ $(document).ready( ()=>{
 				let observer = new MutationObserver(obsF);
 				observer.observe(targetNode, config);
 			} else {
+				console.log('oi')
 				bindObs()
 			}
 		},50)
