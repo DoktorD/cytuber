@@ -96,7 +96,7 @@ $(document).ready( ()=>{
 			} else {
 				bindObs()
 			}
-		},100)
+		},50)
 	}
 	bindObs()
 	console.log('Maurice ready!');
