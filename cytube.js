@@ -53,17 +53,19 @@ $(document).ready( ()=>{
 	
 			}
 		}
-	}	
+	}
+	let tamperDelay = 50
 	function obsF(mutationsList){
 		console.log("mutations ", mutationsList)
 		for (var mutation of mutationsList) {
 			if(mutation.addedNodes.length){
 				for(var added of mutation.addedNodes){
+					// the button was just added to the dom. no guarantee events are bound yet so we delay for each of the buttons
 					setTimeout(() => {
 						for (var el of $(added).find("button")){
-							setTimeout(eventTamper,50, el)
+							setTimeout(eventTamper,tamperDelay, el)
 						}
-					},50)
+					},tamperDelay)
 				}
 			}
 		}
