@@ -1,3 +1,4 @@
+'use strict';
 
 // Define emotes
 const emotes = {
@@ -23,14 +24,72 @@ const emotes = {
 }
 
 $(document).ready( ()=>{
-    'use strict';
-
+	//insert emotes
     const root = document.getElementsByTagName("body")[0];
-
     for (let emoteN in emotes) {
-	let img = document.createElement("img");
-	img.id = emoteN
-	img.src = emotes[emoteN]
+		let img = document.createElement("img");
+		img.id = emoteN
+		img.src = emotes[emoteN]
         root.appendChild(img);
     }
+
+
+	
 });
+
+// block delete and play now
+window.onload = () => {
+
+	function eventTamper(el){
+		var dtMeta = $._data( el, "events" )
+		if(dtMeta.click[0]){
+			var $el = $(el)
+			if($el.hasClass("qbtn-play")||$el.hasClass("qbtn-delete")){
+
+				var handle = dtMeta.click[0].handler
+				console.log("event tamper", el, dtMeta.click, handle)
+				$el.addClass("btn-danger")
+				$el.off("click")
+				$el.on("click",() => {
+					if (confirm("Are u sure about that?")) {
+						handle()
+					}
+				})
+
+			}
+		}
+	}
+
+	function obsF(mutationsList){
+		console.log("mutations ", mutationsList)
+		for (var mutation of mutationsList) {
+			for(var added of mutation.addedNodes){
+				setTimeout(() => {
+					for (var el of $(added).find("button")){
+						setTimeout(eventTamper,150, el)
+					}
+				},150)
+			}
+		}
+	}
+
+	var targetNode = document.getElementById('queue');
+	var config = {
+		attributes: false,
+		childList: true,
+		subtree: false
+	};
+
+	console.log("init tamper")
+	setTimeout( () => {
+		for (var el of $(targetNode).find("button")){
+			eventTamper(el)
+		}
+	},3500)
+
+
+	var observer = new MutationObserver(obsF);
+	observer.observe(targetNode, config);
+	console.log('Maurice ready!');
+
+}
