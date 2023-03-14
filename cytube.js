@@ -83,7 +83,7 @@ $(document).ready( ()=>{
 					attributes: false,
 					childList: true,
 					subtree: false
-				};
+				}
 				for (let el of $(targetNode).find("button")){
 					eventTamper(el)
 				}
