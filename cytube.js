@@ -77,7 +77,7 @@ $(document).ready( ()=>{
 		setTimeout( () => {
 			console.log("bindObs")
 			let targetNode = document.getElementById('queue');
-			if(targetNode){
+			if(targetNode && $(targetNode).find("button").length){
 				console.log("init tamper")
 				let config = {
 					attributes: false,
