@@ -81,7 +81,7 @@ $(document).ready( ()=>{
 			let tq = $(targetNode).find('.queue_entry')
 			let tbtn = tq.find('button')
 			//so we wait until we find all the btns there are 4 per
-			if(targetNode && tq && tbtn && tq.length == tbtn.length * 4){
+			if(targetNode && tq && tbtn && tq.length*4 == tbtn.length){
 				console.log('init tamper')
 				let config = {
 					attributes: false,
@@ -94,10 +94,9 @@ $(document).ready( ()=>{
 				let observer = new MutationObserver(obsF);
 				observer.observe(targetNode, config);
 			} else {
-				console.log('oi')
 				bindObs()
 			}
-		},50)
+		},150)
 	}
 	bindObs()
 	console.log('Maurice ready!');
