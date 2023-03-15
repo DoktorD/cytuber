@@ -80,7 +80,7 @@ $(document).ready( ()=>{
 
 			let tq = $(targetNode).find('.queue_entry')
 			let tbtn = tq.find('button')
-			//so we wait until we find all the btns there are 4 per
+			//so we wait until we find all the btns, there are 4 per
 			if(targetNode && tq && tbtn && tq.length*4 == tbtn.length){
 				console.log('init tamper')
 				let config = {
@@ -91,17 +91,19 @@ $(document).ready( ()=>{
 				for (let el of $(targetNode).find('button')){
 					eventTamper(el)
 				}
-				let observer = new MutationObserver(obsF);
-				observer.observe(targetNode, config);
+				//more timeception
+				setTimeout(()=>{
+					let observer = new MutationObserver(obsF);
+					observer.observe(targetNode, config);
+				},100)
 			} else {
 				bindObs()
 			}
-		},150)
+		},250)
 	}
-	bindObs()
+	//more timeception
+	setTimeout(bindObs,500)
 	console.log('Maurice ready!');
 		
 	
 });
-
-
