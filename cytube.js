@@ -1,6 +1,6 @@
 'use strict';
 
-// Define emotes
+// Background emotes
 const emotes = {
 	quinPsycho : "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8ddaac2eaff94f219a6719a45b214126/default/dark/3.0",
 	batDisco : "https://cdn.7tv.app/emote/61143ae59bf574f1fded6724/4x.webp",
@@ -22,6 +22,19 @@ const emotes = {
 	ratJam : "https://cdn.betterttv.net/emote/5fc5ab31e22688461fed5ba6/3x.webp",
 	docJAM : "https://cdn.7tv.app/emote/604217e977137b000de9e680/4x.webp",
 }
+//Chat emotes
+const cemotes = [
+	{
+		image:"https://cdn.7tv.app/emote/6373c12922efe4715fbc7e7c/3x.webp",
+		name:"notListening",
+		source:"(^|\\s)notListening(?!\\S)",
+	},
+	{
+		image:"https://cdn.7tv.app/emote/60e36764d8080c59922eda92/2x.webp",
+		name:"djShaq",
+		source:"(^|\\s)djShaq(?!\\S)",
+	},
+]
 
 $(document).ready( ()=>{
 	//insert emotes
@@ -41,13 +54,13 @@ $(document).ready( ()=>{
 			var $el = $(el)
 			if($el.hasClass("qbtn-play")||$el.hasClass("qbtn-delete")){
 	
-				var handle = dtMeta.click[0].handler
-				console.log("event tamper", el, dtMeta.click, handle)
-				$el.addClass("btn-danger")
-				$el.off("click")
+				// var handle = dtMeta.click[0].handler
+				// console.log("event tamper", el, dtMeta.click, handle)
+				$el.addClass("btn-danger");
+				$el.off("click");
 				$el.on("click",() => {
 					if (confirm("Are u sure about that?")) {
-						handle()
+						socket.emit("delete", $el.parents("li.queue_entry").data("uid"));
 					}
 				})
 	
@@ -103,7 +116,15 @@ $(document).ready( ()=>{
 	}
 	//more timeception
 	setTimeout(bindObs,500)
-	console.log('Maurice ready!');
-		
+	
+	//Custom Emotes Hack
+	setTimeout(()=>{
+		_e = CHANNEL.emotes.concat(cemotes);
+		loadEmotes(_e);
+		EMOTELIST.handleChange();
+        CSEMOTELIST.handleChange();
+	},1000)
+
+	console.log('Maurice ready!');	
 	
 });
