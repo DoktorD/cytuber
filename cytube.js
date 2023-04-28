@@ -119,7 +119,7 @@ $(document).ready( ()=>{
 	
 	//Custom Emotes Hack
 	setTimeout(()=>{
-		_e = CHANNEL.emotes.concat(cemotes);
+		let _e = CHANNEL.emotes.concat(cemotes);
 		loadEmotes(_e);
 		EMOTELIST.handleChange();
         CSEMOTELIST.handleChange();
