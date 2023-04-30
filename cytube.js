@@ -34,6 +34,26 @@ const cemotes = [
 		name:"djShaq",
 		source:"(^|\\s)djShaq(?!\\S)",
 	},
+	{
+		image:"https://cdn.7tv.app/emote/61812a68c632476d20d0d58e/1x.webp",
+		name:"docShuffle",
+		source:"(^|\\s)docShuffle(?!\\S)",
+	},
+	{
+		image:"https://cdn.7tv.app/emote/61376929c35b1e798a8e9647/2x.webp",
+		name:"AND",
+		source:"(^|\\s)AND(?!\\S)",
+	},
+	{
+		image:"https://cdn.7tv.app/emote/603cd0152c7b4500143b46db/1x.webp",
+		name:"DOCING",
+		source:"(^|\\s)DOCING(?!\\S)",
+	},
+	{
+		image:"https://cdn.7tv.app/emote/60b91e2b1b94ba73130927aa/1x.webp",
+		name:"docJam",
+		source:"(^|\\s)docJam(?!\\S)",
+	},
 ]
 
 $(document).ready( ()=>{
