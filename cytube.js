@@ -54,6 +54,11 @@ const cemotes = [
 		name:"docJam",
 		source:"(^|\\s)docJam(?!\\S)",
 	},
+	{
+		image:"https://cdn.7tv.app/emote/62c02c2cc2b63d1e2f3d8782/1x.webp",
+		name:"hmmMeeting",
+		source:"(^|\\s)hmmMeeting(?!\\S)",
+	},
 ]
 
 $(document).ready( ()=>{
@@ -103,8 +108,6 @@ $(document).ready( ()=>{
 			}
 		}
 	}
-	
-	
 	function bindObs(){
 		//holy race condition site. god knows when the queue is added to the dom 
 		setTimeout( () => {
@@ -137,13 +140,20 @@ $(document).ready( ()=>{
 	//more timeception
 	setTimeout(bindObs,500)
 	
-	//Custom Emotes Hack
-	setTimeout(()=>{
+
+	function emoteHack(){
 		let _e = CHANNEL.emotes.concat(cemotes);
 		loadEmotes(_e);
 		EMOTELIST.handleChange();
-        CSEMOTELIST.handleChange();
-	},1000)
+		CSEMOTELIST.handleChange();
+	}
+	//Custom Emotes Hack
+	setTimeout(emoteHack,1000)
+	Callbacks.reconnect = ()=>{
+		console.log("success hacked reconnect")
+		socket.emit("reportReconnect");
+		emoteHack();
+	};
 
 	console.log('Maurice ready!');	
 	
