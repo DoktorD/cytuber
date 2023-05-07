@@ -141,18 +141,18 @@ $(document).ready( ()=>{
 	setTimeout(bindObs,500)
 	
 
-	function emoteHack(){
-		let _e = CHANNEL.emotes.concat(cemotes);
-		loadEmotes(_e);
-		EMOTELIST.handleChange();
-		CSEMOTELIST.handleChange();
-	}
+	// function emoteHack(){
+	// 	let _e = CHANNEL.emotes.concat(cemotes);
+	// 	loadEmotes(_e);
+	// 	EMOTELIST.handleChange();
+	// 	CSEMOTELIST.handleChange();
+	// }
 	//Custom Emotes Hack
 	setTimeout(emoteHack,1000)
 	Callbacks.reconnect = ()=>{
 		console.log("success hacked reconnect")
 		socket.emit("reportReconnect");
-		emoteHack();
+		// emoteHack();
 	};
 
 	console.log('Maurice ready!');	
