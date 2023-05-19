@@ -1,7 +1,7 @@
 'use strict';
 
 // Background emotes
-const emotes = {
+const bgEmotes = {
 	quinPsycho : "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8ddaac2eaff94f219a6719a45b214126/default/dark/3.0",
 	batDisco : "https://cdn.7tv.app/emote/61143ae59bf574f1fded6724/4x.webp",
 	AlienGathering : "https://cdn.7tv.app/emote/60ae6b4486fc40d488d0b324/4x.webp",
@@ -64,7 +64,7 @@ const cemotes = [
 $(document).ready( ()=>{
 	//insert emotes
     const root = document.getElementsByTagName("body")[0];
-    for (let emoteN in emotes) {
+    for (let emoteN in bgEmotes) {
 		let img = document.createElement("img");
 		img.id = emoteN
 		img.src = emotes[emoteN]
@@ -72,73 +72,74 @@ $(document).ready( ()=>{
     }
 
 
-	// block delete and play now
-	function eventTamper(el){
-		var dtMeta = $._data( el, "events" )
-		if(dtMeta.click[0]){
-			var $el = $(el)
-			if($el.hasClass("qbtn-play")||$el.hasClass("qbtn-delete")){
+	// techincally no longer needed
+	// dynamic block delete and play now
+	// function eventTamper(el){
+	// 	var dtMeta = $._data( el, "events" )
+	// 	if(dtMeta.click[0]){
+	// 		var $el = $(el)
+	// 		if($el.hasClass("qbtn-play")||$el.hasClass("qbtn-delete")){
 	
-				// var handle = dtMeta.click[0].handler
-				// console.log("event tamper", el, dtMeta.click, handle)
-				$el.addClass("btn-danger");
-				$el.off("click");
-				$el.on("click",() => {
-					if (confirm("Are u sure about that?")) {
-						socket.emit("delete", $el.parents("li.queue_entry").data("uid"));
-					}
-				})
+	// 			// var handle = dtMeta.click[0].handler
+	// 			// console.log("event tamper", el, dtMeta.click, handle)
+	// 			$el.addClass("btn-danger");
+	// 			$el.off("click");
+	// 			$el.on("click",() => {
+	// 				if (confirm("Are u sure about that?")) {
+	// 					socket.emit("delete", $el.parents("li.queue_entry").data("uid"));
+	// 				}
+	// 			})
 	
-			}
-		}
-	}
-	let tamperDelay = 50
-	function obsF(mutationsList){
-		console.log("mutations ", mutationsList)
-		for (var mutation of mutationsList) {
-			if(mutation.addedNodes.length){
-				for(var added of mutation.addedNodes){
-					// the button was just added to the dom. no guarantee events are bound yet so we delay for each of the buttons
-					setTimeout(() => {
-						for (var el of $(added).find("button")){
-							setTimeout(eventTamper,tamperDelay, el)
-						}
-					},tamperDelay)
-				}
-			}
-		}
-	}
-	function bindObs(){
-		//holy race condition site. god knows when the queue is added to the dom 
-		setTimeout( () => {
-			console.log('bindObs')
-			let targetNode = document.getElementById('queue')
+	// 		}
+	// 	}
+	// }
+	// let tamperDelay = 50
+	// function obsF(mutationsList){
+	// 	console.log("mutations ", mutationsList)
+	// 	for (var mutation of mutationsList) {
+	// 		if(mutation.addedNodes.length){
+	// 			for(var added of mutation.addedNodes){
+	// 				// the button was just added to the dom. no guarantee events are bound yet so we delay for each of the buttons
+	// 				setTimeout(() => {
+	// 					for (var el of $(added).find("button")){
+	// 						setTimeout(eventTamper,tamperDelay, el)
+	// 					}
+	// 				},tamperDelay)
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// function bindObs(){
+	// 	//holy race condition site. god knows when the queue is added to the dom 
+	// 	setTimeout( () => {
+	// 		console.log('bindObs')
+	// 		let targetNode = document.getElementById('queue')
 
-			let tq = $(targetNode).find('.queue_entry')
-			let tbtn = tq.find('button')
-			//so we wait until we find all the btns, there are 4 per
-			if(targetNode && tq && tbtn && tq.length*4 == tbtn.length){
-				console.log('init tamper')
-				let config = {
-					attributes: false,
-					childList: true,
-					subtree: false
-				}
-				for (let el of $(targetNode).find('button')){
-					eventTamper(el)
-				}
-				//more timeception
-				setTimeout(()=>{
-					let observer = new MutationObserver(obsF);
-					observer.observe(targetNode, config);
-				},100)
-			} else {
-				bindObs()
-			}
-		},250)
-	}
-	//more timeception
-	setTimeout(bindObs,500)
+	// 		let tq = $(targetNode).find('.queue_entry')
+	// 		let tbtn = tq.find('button')
+	// 		//so we wait until we find all the btns, there are 4 per
+	// 		if(targetNode && tq && tbtn && tq.length*4 == tbtn.length){
+	// 			console.log('init tamper')
+	// 			let config = {
+	// 				attributes: false,
+	// 				childList: true,
+	// 				subtree: false
+	// 			}
+	// 			for (let el of $(targetNode).find('button')){
+	// 				eventTamper(el)
+	// 			}
+	// 			//more timeception
+	// 			setTimeout(()=>{
+	// 				let observer = new MutationObserver(obsF);
+	// 				observer.observe(targetNode, config);
+	// 			},100)
+	// 		} else {
+	// 			bindObs()
+	// 		}
+	// 	},250)
+	// }
+	// //more timeception
+	// setTimeout(bindObs,500)
 	
 
 	// function emoteHack(){
@@ -147,14 +148,46 @@ $(document).ready( ()=>{
 	// 	EMOTELIST.handleChange();
 	// 	CSEMOTELIST.handleChange();
 	// }
+
 	//Custom Emotes Hack
-	setTimeout(emoteHack,1000)
+	// setTimeout(emoteHack,1000)
+
 	Callbacks.reconnect = ()=>{
 		console.log("success hacked reconnect")
 		socket.emit("reportReconnect");
 		// emoteHack();
 	};
 
-	console.log('Maurice ready!');	
 	
+
+	//override addqueuebuttons
+	addQueueButtonsO = addQueueButtons;
+	addQueueButtons = function(li){
+		console.log('qfnoverride')
+		addQueueButtonsO(li);
+		li.find('.qbtn-play')
+			.addClass("btn-danger")
+			.off('click')
+			.on('click',()=>{
+					if (confirm("Are u sure about playing that?")) {
+						socket.emit("jumpTo", li.data("uid"));
+					}
+				})
+			;
+		li.find('.qbtn-delete')
+			.addClass("btn-danger")
+			.off('click')
+			.on('click',()=>{
+					if (confirm("Are u sure about deleting that?")) {
+						socket.emit("delete", li.data("uid"));
+					}
+				})
+			;
+
+		setTimeout(rebuildPlaylist,100);
+		
+	}
+
+	console.log('Maurice ready!');	
+
 });
