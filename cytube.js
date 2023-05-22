@@ -67,7 +67,7 @@ $(document).ready( ()=>{
     for (let emoteN in bgEmotes) {
 		let img = document.createElement("img");
 		img.id = emoteN
-		img.src = emotes[emoteN]
+		img.src = bgEmotes[emoteN]
         root.appendChild(img);
     }
 
