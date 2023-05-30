@@ -161,7 +161,7 @@ $(document).ready( ()=>{
 	
 
 	//override addqueuebuttons
-	addQueueButtonsO = addQueueButtons;
+	var addQueueButtonsO = addQueueButtons;
 	addQueueButtons = function(li){
 		console.log('qfnoverride')
 		addQueueButtonsO(li);
