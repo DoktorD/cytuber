@@ -184,9 +184,8 @@ $(document).ready( ()=>{
 				})
 			;
 
-		setTimeout(rebuildPlaylist,100);
-		
-	}
+		}
+	setTimeout(rebuildPlaylist,100);
 
 	console.log('Maurice ready!');	
 
