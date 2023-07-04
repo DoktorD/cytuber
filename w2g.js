@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name         Watch2Gether
 // @namespace    https://w2g.tv/
-// @version      0.11
-// @description  try to take over the world!
-// @author       You
+// @version      0.12
+// @description  u better watch yo self
+// @author       MauriceMann
+// @updateURL    https://raw.githubusercontent.com/DoktorD/cytuber/master/w2g.js
 // @match        https://w2g.tv/en/room/?access_key=cfd5n1dr6mg1cgrttahi6r
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=w2g.tv
 // @require      https://code.jquery.com/jquery-3.7.0.slim.min.js
