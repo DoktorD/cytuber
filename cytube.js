@@ -61,6 +61,83 @@ const cemotes = [
 	},
 ]
 
+
+custom_emote_tab = function(){
+	let UI_ChannelCache = 0;
+    let UI_GroupEmotes = 1;
+    let GroupEmotes_Number = 25;
+    let EMOTES = false;
+    function toggleDiv(div) {
+        $(div).css('display')=="none" ? $(div).show() : $(div).hide();
+    }
+	function showEmotes() {
+		if (typeof GroupEmotes_Number!=="number" || GroupEmotes_Number<1) {
+			GroupEmotes_Number=100;
+		}
+		let len=CHANNEL.emotes.length;
+		if (len<1) {
+			emotespanel.addClass('row');
+			makeAlert("No emotes available", "Ask channel administrator.").appendTo(emotespanel);
+		} else if (UI_GroupEmotes!="1" || len<=GroupEmotes_Number) {
+			for (let i in CHANNEL.emotes) {
+				$('<img onclick="insertText(\''+CHANNEL.emotes[i].name+' \')" />')
+				.attr({'src':CHANNEL.emotes[i].image, 'title':CHANNEL.emotes[i].name})
+				.appendTo(emotespanel);
+			}
+		} else {
+			var arr = new Array();
+			let stop=GroupEmotes_Number-1;
+			let gr=Math.ceil(CHANNEL.emotes.length/GroupEmotes_Number);
+			let html='';
+
+			for (let i=0; i<len; i++) {
+				html += '<img src="'+CHANNEL.emotes[i].image+'" '
+				+ 'onclick="insertText(\''+CHANNEL.emotes[i].name+' \')" />';
+				if (i%GroupEmotes_Number==stop) {
+					arr.push(html);
+					html='';
+				}
+			}
+			console.log(arr);
+			len%GroupEmotes_Number!=0 ? arr.push(html) : '';
+
+			for (let i=0; i<gr; i++) {
+				let div = $('<div id="emotes-'+i+'" class="groupemotes" style="display:none" />')
+				.html(arr[i])
+				.appendTo(emotespanel);
+			}
+			arr='';
+
+			let emotesbtnwrap = $('<div id="emotesbtnwrap" />').appendTo(emotespanel);
+			let emotesbtngroup = $('<div id="emotescontrols" class="btn-group">').appendTo(emotesbtnwrap);
+
+			for (let i=0; i<gr; i++) {
+				let btn = $('<button class="btn btn-sm btn-default emotesbtn" group="'+i+'">'+(i+1)+'</button>')
+				.appendTo(emotesbtngroup)
+				.on("click", function() {
+					$(".emotesbtn").removeClass('active');
+					$(this).addClass('active');
+					$(".groupemotes").hide();
+					let nr=$(this).attr('group');
+					$("#emotes-"+nr).show();
+				});
+			}
+			$("#emotes-0").show();
+			$("#emotescontrols button:nth-child(1)").addClass('active');
+		}
+		EMOTES=true;
+	}
+	let chatpanel = $('<div id="chatpanel" class="row" />').insertBefore("#playlistrow");
+	let emotespanel = $('<div id="emotespanel" style="display:none" />').appendTo(chatpanel);
+	let chatcontrols = $('<div id="chatcontrols" class="btn-group" />').appendTo("#chatwrap");
+	let emotesbtn = $('<button id="emotes-btn" class="btn btn-sm btn-default" title="Display emotes panel" />')
+		.html('<i class="glyphicon glyphicon-picture"></i>')
+		.appendTo(chatcontrols)
+		.on("click", function() {
+			toggleDiv(emotespanel);
+			(UI_ChannelCache!="1" && !EMOTES) ? showEmotes() : '';
+		});
+}
 $(document).ready( ()=>{
 	//insert emotes
     const root = document.getElementsByTagName("body")[0];
@@ -186,6 +263,8 @@ $(document).ready( ()=>{
 
 		}
 	setTimeout(rebuildPlaylist,100);
+
+
 
 	console.log('Maurice ready!');	
 

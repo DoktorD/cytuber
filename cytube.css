@@ -7,6 +7,20 @@ footer {
     display: none!important;
 }
 
+#fontspanel, #emotespanel {
+    text-align: center;
+    max-width: 700px;
+    margin: 0px auto 5px auto;
+    border: solid 2px white;
+    border-radius: 6px;
+}
+
+#emotespanel img {
+    margin: 5px;
+    max-height: 35px;
+    cursor: pointer;
+}
+
 @keyframes bounce-up {
     0%   { transform: scale(1,1)      translateY(0); }
     10%  { transform: scale(1.1,.9)   translateY(0); }
