@@ -64,15 +64,15 @@ const cemotes = [
 
 function custom_emote_tab(){
 	let UI_ChannelCache = 0;
-    let UI_GroupEmotes = 1;
-    let GroupEmotes_Number = 25;
-    let EMOTES = false;
+	let UI_GroupEmotes = 1;
+	let GroupEmotes_Number = 54;
+	let EMOTES = false;
 	window.insertText = function(str) {
 		$("#chatline").val($("#chatline").val()+str).focus();
 	}	
-    function toggleDiv(div) {
-        $(div).css('display')=="none" ? $(div).show() : $(div).hide();
-    }
+	function toggleDiv(div) {
+		$(div).css('display')=="none" ? $(div).show() : $(div).hide();
+	}
 	function showEmotes() {
 		if (typeof GroupEmotes_Number!=="number" || GroupEmotes_Number<1) {
 			GroupEmotes_Number=100;
@@ -143,13 +143,13 @@ function custom_emote_tab(){
 }
 $(document).ready( ()=>{
 	//insert emotes
-    const root = document.getElementsByTagName("body")[0];
-    for (let emoteN in bgEmotes) {
+	const root = document.getElementsByTagName("body")[0];
+	for (let emoteN in bgEmotes) {
 		let img = document.createElement("img");
 		img.id = emoteN
 		img.src = bgEmotes[emoteN]
-        root.appendChild(img);
-    }
+		root.appendChild(img);
+	}
 
 
 	// techincally no longer needed
