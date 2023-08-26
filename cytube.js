@@ -62,7 +62,7 @@ const cemotes = [
 ]
 
 
-custom_emote_tab = function(){
+function custom_emote_tab(){
 	let UI_ChannelCache = 0;
     let UI_GroupEmotes = 1;
     let GroupEmotes_Number = 25;
