@@ -67,6 +67,9 @@ function custom_emote_tab(){
     let UI_GroupEmotes = 1;
     let GroupEmotes_Number = 25;
     let EMOTES = false;
+	window.insertText = function(str) {
+		$("#chatline").val($("#chatline").val()+str).focus();
+	}	
     function toggleDiv(div) {
         $(div).css('display')=="none" ? $(div).show() : $(div).hide();
     }
