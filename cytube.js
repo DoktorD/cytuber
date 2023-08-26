@@ -264,7 +264,7 @@ $(document).ready( ()=>{
 		}
 	setTimeout(rebuildPlaylist,100);
 
-
+	custom_emote_tab();
 
 	console.log('Maurice ready!');	
 
