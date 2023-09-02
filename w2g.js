@@ -2,7 +2,7 @@
 // @name			Watch2Gether
 // @namespace		https://w2g.tv/
 // @version			0.12
-// @description		u better watch yo self
+// @description		u better watch yoself
 // @author			MauriceMann
 // @downloadURL		https://raw.githubusercontent.com/DoktorD/cytuber/master/w2g.js
 // @updateURL		https://raw.githubusercontent.com/DoktorD/cytuber/master/w2g.js
@@ -29,7 +29,7 @@
 	function replaceChatEmotes(s){
 		let _s = s;
 		for (let e of Emotes) {
-			_s =_s.replaceAll(e.regg, `&nbsp<img src="${e.image}" style="display: inline-block">`);
+			_s =_s.replaceAll(e.regg, `<img src="${e.image}" style="display: inline-block">&nbsp`);
 		}
 		return _s;
 	}
@@ -78,8 +78,8 @@
 	//appearance thingies
 	$("#w2g-editorial").hide();
 	$(".w2g-main-right").css({
-		"width": "600px",
-		"max-width": "600px",
+		"width": "45%",
+		"max-width": "45%",
 	});
 	console.log("Maurice here");
 })();

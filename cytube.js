@@ -67,6 +67,10 @@ function custom_emote_tab(){
 	let UI_GroupEmotes = 1;
 	let GroupEmotes_Number = 54;
 	let EMOTES = false;
+	window.errReload = function(){
+		let src = this.src;
+    	this.src = src.substr(0, src.indexOf('?')) + '?t=' + new Date().getTime()
+	}
 	window.insertText = function(str) {
 		$("#chatline").val($("#chatline").val()+str).focus();
 	}	
@@ -83,7 +87,7 @@ function custom_emote_tab(){
 			makeAlert("No emotes available", "Ask channel administrator.").appendTo(emotespanel);
 		} else if (UI_GroupEmotes!="1" || len<=GroupEmotes_Number) {
 			for (let i in CHANNEL.emotes) {
-				$('<img onclick="insertText(\''+CHANNEL.emotes[i].name+' \')" />')
+				$('<img onclick="insertText(\''+CHANNEL.emotes[i].name+' \')" onerror="errReload()"/>')
 				.attr({'src':CHANNEL.emotes[i].image, 'title':CHANNEL.emotes[i].name})
 				.appendTo(emotespanel);
 			}
@@ -132,7 +136,7 @@ function custom_emote_tab(){
 	}
 	let chatpanel = $('<div id="chatpanel" class="row" />').insertBefore("#playlistrow");
 	let emotespanel = $('<div id="emotespanel" style="display:none" />').appendTo(chatpanel);
-	let chatcontrols = $('<div id="chatcontrols" class="btn-group" />').appendTo("#chatwrap");
+	let chatcontrols = $('<div id="chatcontrols" class="btn-group" />').appendTo("#leftcontrols");
 	let emotesbtn = $('<button id="emotes-btn" class="btn btn-sm btn-default" title="Display emotes panel" />')
 		.html('<i class="glyphicon glyphicon-picture"></i>')
 		.appendTo(chatcontrols)
