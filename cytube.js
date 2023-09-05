@@ -99,7 +99,7 @@ function custom_emote_tab(){
 
 			for (let i=0; i<len; i++) {
 				html += '<img src="'+CHANNEL.emotes[i].image+'" '
-				+ 'onclick="insertText(\''+CHANNEL.emotes[i].name+' \')" />';
+				+ 'onclick="insertText(\''+CHANNEL.emotes[i].name+' \')" onerror="errReload()"/>';
 				if (i%GroupEmotes_Number==stop) {
 					arr.push(html);
 					html='';
