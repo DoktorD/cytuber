@@ -145,6 +145,40 @@ function custom_emote_tab(){
 			(UI_ChannelCache!="1" && !EMOTES) ? showEmotes() : '';
 		});
 }
+
+
+//override addqueuebuttons
+var qOverriden = false;
+function overrideQbuttons(){
+	if(!qOverriden){
+		let addQueueButtonsO = window.addQueueButtons;
+		window.addQueueButtons = function(li){
+			console.log('qfnoverride')
+			addQueueButtonsO(li);
+			li.find('.qbtn-play')
+				.addClass("btn-danger")
+				.off('click')
+				.on('click',()=>{
+						if (confirm("Are u sure about playing that?")) {
+							socket.emit("jumpTo", li.data("uid"));
+						}
+					})
+			;
+			li.find('.qbtn-delete')
+				.addClass("btn-danger")
+				.off('click')
+				.on('click',()=>{
+						if (confirm("Are u sure about deleting that?")) {
+							socket.emit("delete", li.data("uid"));
+						}
+					})
+			;
+	
+		}
+		qOverriden = true;
+	}
+}
+
 $(document).ready( ()=>{
 	//insert emotes
 	const root = document.getElementsByTagName("body")[0];
@@ -244,33 +278,9 @@ $(document).ready( ()=>{
 
 	
 
-	//override addqueuebuttons
-	var addQueueButtonsO = addQueueButtons;
-	addQueueButtons = function(li){
-		console.log('qfnoverride')
-		addQueueButtonsO(li);
-		li.find('.qbtn-play')
-			.addClass("btn-danger")
-			.off('click')
-			.on('click',()=>{
-					if (confirm("Are u sure about playing that?")) {
-						socket.emit("jumpTo", li.data("uid"));
-					}
-				})
-			;
-		li.find('.qbtn-delete')
-			.addClass("btn-danger")
-			.off('click')
-			.on('click',()=>{
-					if (confirm("Are u sure about deleting that?")) {
-						socket.emit("delete", li.data("uid"));
-					}
-				})
-			;
 
-		}
 	setTimeout(rebuildPlaylist,100);
-
+	overrideQbuttons();
 	custom_emote_tab();
 
 	console.log('Maurice ready!');	
